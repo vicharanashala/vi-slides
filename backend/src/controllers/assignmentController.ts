@@ -2,9 +2,6 @@ import { Request, Response } from 'express';
 import Assignment from '../models/Assignment';
 import Submission from '../models/Submission';
 
-// @desc    Create a new assignment
-// @route   POST /api/assignments
-// @access  Private (Teacher only)
 export const createAssignment = async (req: Request, res: Response): Promise<void> => {
     try {
         const { title, description, maxMarks, deadline } = req.body;
@@ -33,9 +30,6 @@ export const createAssignment = async (req: Request, res: Response): Promise<voi
     }
 };
 
-// @desc    Get all assignments (filtered by role)
-// @route   GET /api/assignments
-// @access  Private
 export const getAllAssignments = async (req: Request, res: Response): Promise<void> => {
     try {
         let assignments;

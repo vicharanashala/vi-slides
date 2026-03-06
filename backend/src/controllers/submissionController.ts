@@ -65,9 +65,6 @@ export const submitAssignment = async (req: Request, res: Response): Promise<voi
     }
 };
 
-// @desc    Get all submissions for an assignment
-// @route   GET /api/submissions/assignment/:assignmentId
-// @access  Private (Teacher only - own assignments)
 export const getSubmissionsByAssignment = async (req: Request, res: Response): Promise<void> => {
     try {
         const { assignmentId } = req.params;

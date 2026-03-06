@@ -140,7 +140,7 @@ export const processBatch = async (sessionId: string): Promise<void> => {
                     console.log(`✅ Question ${original._id} refined`);
                 }
             } catch (error) {
-                console.error(`❌ Error updating question ${original._id}:`, error);
+                console.error(` Error updating question ${original._id}:`, error);
             }
         }
 
@@ -152,10 +152,10 @@ export const processBatch = async (sessionId: string): Promise<void> => {
                 batchTimestamp: new Date()
             });
 
-            console.log(`📡 Emitted ${refinedQuestions.length} refined questions to session ${sessionId}`);
+            console.log(` Emitted ${refinedQuestions.length} refined questions to session ${sessionId}`);
         }
     } catch (error) {
-        console.error(`❌ Error processing batch for session ${sessionId}:`, error);
+        console.error(`Error processing batch for session ${sessionId}:`, error);
 
         // Re-queue failed questions for retry
         questionQueue.set(sessionId, [...queue, ...(questionQueue.get(sessionId) || [])]);
