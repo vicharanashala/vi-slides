@@ -11,17 +11,6 @@ const Login: React.FC = () => {
         password: ''
     });
     const { login } = useAuth();
-    // Actually AuthContext login takes LoginData {email, password}. Google login returns token/user directly.
-    // I should probably manually handle the state update here or add a googleLogin method to context.
-    // For now, let's just handle it here by setting session and reloading/updating context.
-    // Wait, AuthContext sets state on login. I should probably add googleLogin to context or just update user manually.
-    // Let's use the 'login' from context if possible, but it expects email/pass.
-    // Better to update AuthContext to force set user.
-    // Let's check AuthContext again. It has setUser/updateUser.
-
-    // Correction: AuthContext has `login` function which does the API call. 
-    // I will manually call authService.googleLogin, then update context.
-
     const navigate = useNavigate();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -49,7 +38,6 @@ const Login: React.FC = () => {
         try {
             const res = await authService.googleLogin(credentialResponse.credential);
             if (res.success) {
-                // Manually update session storage and context since we bypassed context.login
                 sessionStorage.setItem('token', res.token);
                 sessionStorage.setItem('user', JSON.stringify(res.user));
                 window.location.href = '/dashboard'; // Hard reload to ensure context picks up or use proper context method
